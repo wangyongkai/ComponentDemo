@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     //1.app 依赖base不管是implementation还是api  如果base再implementation依赖componentbase
     // 那么app中就不能使用componentbase中的类了  个人理解：该依赖方式所依赖的库不会传递，只会在当前module中生效。
     //2.api：跟2.x版本的 compile完全相同  该依赖方式会传递所依赖的库，当其他module依赖了该module时，可以使用该module下使用api依赖的库。
-    //
 
 
     //------------------------------------------------------------------------------
