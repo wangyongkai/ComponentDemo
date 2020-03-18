@@ -20,10 +20,14 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [ moduleName : project.getName() ]
+                arguments = [moduleName: project.getName()]
             }
         }
     }
+
+
+    resourcePrefix "login_"
+
 
     sourceSets {
         main {
@@ -46,6 +50,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project (':base')
+    implementation project(':base')
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
 }
