@@ -42,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
     //2.api：跟2.x版本的 compile完全相同  该依赖方式会传递所依赖的库，当其他module依赖了该module时，可以使用该module下使用api依赖的库。
 
 
+
+    //疑惑：implementation能解决包依赖冲突问题吗？工程依赖了A C， C中又依赖了A的不同版本，会怎么样？
+    //
+
+
+
+
+
     //------------------------------------------------------------------------------
 
 
