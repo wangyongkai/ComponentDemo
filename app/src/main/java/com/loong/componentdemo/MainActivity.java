@@ -32,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
     //重复依赖同一个库 不会发生冲突
 
+    //app依赖base 组件依赖base  app又依赖组件  会产生重复依赖问题吗
+    //如果真有重复依赖的问题，在你编译打包的时候就会报错.
+    // 在构建APP的过程中Gradle会自动将重复的arr包排除，APP中也就不会存在相同的代码了；
+
+
     //1.app 依赖base不管是implementation还是api  如果base再implementation依赖componentbase
     // 那么app中就不能使用componentbase中的类了  个人理解：该依赖方式所依赖的库不会传递，只会在当前module中生效。
     //2.api：跟2.x版本的 compile完全相同  该依赖方式会传递所依赖的库，当其他module依赖了该module时，可以使用该module下使用api依赖的库。
