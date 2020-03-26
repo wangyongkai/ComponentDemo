@@ -30,10 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
     //问题1：依赖冲突到底什么时候才能发生？
 
-    //重复依赖同一个库 不会发生冲突
 
     //app依赖base 组件依赖base  app又依赖组件  会产生重复依赖问题吗
-    //如果真有重复依赖的问题，在你编译打包的时候就会报错.
+    //不会 重复依赖同一个库 不会发生冲突 如果真有重复依赖的问题，在你编译打包的时候就会报错.
     // 在构建APP的过程中Gradle会自动将重复的arr包排除，APP中也就不会存在相同的代码了；
 
 
@@ -43,8 +42,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    //疑惑：implementation能解决包依赖冲突问题吗？工程依赖了A C， C中又依赖了A的不同版本，会怎么样？
-    //
+    //疑惑1：implementation能解决包依赖冲突问题吗？工程implementation依赖了A C， C中implementation又依赖了A的不同版本，会怎么样？
+    //工程能使用自己依赖的A的类 但是看不到C中依赖的不同版本A的类 那么打包的时候 如果把工程自己依赖的A打进去  那么C因为依赖不同的版本A可能方法不一样 不会报错吗？？？
+
+
+    //疑惑2：依赖不同的包可以通过exclude方式排除
+    //就是一个库 exclude 库中冲突的库 那么打完包 这个库不就不能正常运行了吗（版本不同导致方法没有等问题）
+
+
+
 
 
 
