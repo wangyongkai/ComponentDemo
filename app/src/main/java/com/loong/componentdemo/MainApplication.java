@@ -7,7 +7,7 @@ import com.loong.base.AppConfig;
 import com.loong.base.BaseApp;
 
 public class MainApplication extends BaseApp {
-    
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -30,7 +30,7 @@ public class MainApplication extends BaseApp {
     @Override
     public void initModuleApp(Application application) {
         //利用反射构造组件的application 初始化所有组件
-        // 疑问：必须用application ？ 是因为单独运行时初始化
+        // 疑问：必须用application ？ 是因为单独运行时需要application初始化
         // 写在了application里 这样就构造了组件的application对象 但是 没有走生命周期
         for (String moduleApp : AppConfig.moduleApps) {
             try {

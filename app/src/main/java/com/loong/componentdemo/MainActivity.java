@@ -37,23 +37,40 @@ public class MainActivity extends AppCompatActivity {
 
 
     //1.app 依赖base不管是implementation还是api  如果base再implementation依赖componentbase
-    // 那么app中就不能使用componentbase中的类了  个人理解：该依赖方式所依赖的库不会传递，只会在当前module中生效。
+    // 那么app中就不能使用componentbase中的类了  个人理解：该依赖方式所依赖的库不会传递，只会在当前module中生效。虽然不传递，最后打包肯定要打进去。
     //2.api：跟2.x版本的 compile完全相同  该依赖方式会传递所依赖的库，当其他module依赖了该module时，可以使用该module下使用api依赖的库。
 
 
+    //implementation的作用：1. 加快编译速度。2. 隐藏对外不必要的接口。   A 依赖 B  B implementation C   如果修改C 只需要编译B即可 因为A看不到C中的类啊 没法代码中使用
+//问题：为什么会加快编译速度？
 
+
+    //--------------------------
     //疑惑1：implementation能解决包依赖冲突问题吗？工程implementation依赖了A C， C中implementation又依赖了A的不同版本，会怎么样？
     //工程能使用自己依赖的A的类 但是看不到C中依赖的不同版本A的类 那么打包的时候 如果把工程自己依赖的A打进去  那么C因为依赖不同的版本A可能方法不一样 不会报错吗？？？
 
 
     //疑惑2：依赖不同的包可以通过exclude方式排除
-    //就是一个库 exclude 库中冲突的库 那么打完包 这个库不就不能正常运行了吗（版本不同导致方法没有等问题）
+    //就是一个库 exclude 库中冲突的库 那么打完包 如果这个库依赖的库跟主工程中的库版本不一样。不就可能不正常运行了吗（版本不同导致方法没有等问题，个人理解此时肯定打包不过，或者新版本向下兼容能打包过）
 
 
+//举例：第三方包'liji.library.dev:citypickerview:4.1.1'中引用的v7包和项目引用的v7包冲突导致
+
+//报错：java.lang.RuntimeException: com.android.builder.dexing.DexArchiveMergerException:
+//Unable to merge dex
+
+//解决：dependencies {
+//    implementation 'com.android.support:appcompat-v7:28.0.0'
+//    implementation ('liji.library.dev:citypickerview:4.1.1') {
+//        exclude group: 'com.android.support'
+//    }
+//}
 
 
-
-
+    //解惑结论：
+    // 1.相同版本库重复依赖不会产生冲突。重复依赖不同版本库才会产生冲突。
+    //2.不同版本库的exclude要注意保留最新的。不然不能向下兼容。
+    //---------------------------
 
 
     //------------------------------------------------------------------------------
@@ -74,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     //组件与组件相互不依赖。类不同不能相互引用。
     //组件都依赖基础库。可以把基础库作为中间桥梁(接口)。将接口实现注册给接口，然后其他组件通过调用
     // 接口来实际调用被调用组件的接口实现。
-    //注意：不是靠上层的app做为桥梁 而是靠共同依赖的底层库作为桥梁。
+    //注意：不是靠上层的app做为桥梁 而是靠共同依赖的底层库作为桥梁。（这个貌似与依赖倒置原则 相反呵？）
 
 
     //------------------------------------------------------------------------------

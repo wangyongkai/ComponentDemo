@@ -8,7 +8,7 @@ import com.loong.componentbase.ServiceFactory;
 public class LoginApp extends BaseApp {
 
     @Override
-    public void onCreate() {
+    public void onCreate() {//组件化时不走这个生命周期
         super.onCreate();
         initModuleApp(this);
         initModuleData(this);
